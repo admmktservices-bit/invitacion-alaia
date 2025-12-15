@@ -94,3 +94,20 @@ updateCountdown();
 setInterval(updateCountdown, 60000);
 
 
+
+// 🎵 Música después de 2 segundos
+window.addEventListener("load", () => {
+  const music = document.getElementById("bg-music");
+
+  if (!music) return;
+
+  setTimeout(() => {
+    music.volume = 0.4; // volumen suave
+    music.play().catch(() => {
+      // Si el navegador bloquea autoplay, espera interacción
+      document.addEventListener("click", () => {
+        music.play();
+      }, { once: true });
+    });
+  }, 2000);
+});
