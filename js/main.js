@@ -31,66 +31,91 @@ function updateCountdown() {
 
 updateCountdown();
 setInterval(updateCountdown, 60000);
-
 /***********************
- 🎵 MÚSICA
+ 🎵 MÚSICA + OVERLAY + BOTÓN PLAY/PAUSE
 ************************/
-const music = document.getElementById("bg-music");
-const musicBtn = document.getElementById("music-toggle");
-const overlay = document.getElementById("start-overlay");
+document.addEventListener("DOMContentLoaded", () => {
+  const music = document.getElementById("bg-music");
+  const musicBtn = document.getElementById("music-toggle");
+  const overlay = document.getElementById("start-overlay");
 
-let musicStarted = false;
-
-function fadeInMusic() {
-  if (musicStarted) return;
-  musicStarted = true;
-
-  music.volume = 0;
-  music.play().then(() => {
-    let vol = 0;
-    const fade = setInterval(() => {
-      if (vol < 0.4) {
-        vol += 0.02;
-        music.volume = vol;
-      } else {
-        clearInterval(fade);
-      }
-    }, 150);
-  });
-}
-
-/* Overlay: primer toque */
-overlay.addEventListener("click", () => {
-  overlay.style.display = "none";
-
-  setTimeout(() => {
-    fadeInMusic();
-  }, 1000); // ⏱️ 2 segundos reales
-});
-
-
-
-/* Botón ON / OFF */
-musicBtn.addEventListener("click", (e) => {
-  e.stopPropagation();
-  if (music.paused) {
-    music.play();
-    musicBtn.textContent = "🔊";
-  } else {
-    music.pause();
-    musicBtn.textContent = "🔇";
+  if (!music || !musicBtn || !overlay) {
+    console.error("Audio, botón o overlay no encontrados en el DOM");
+    return;
   }
-});
 
-/* Abejita baila con música */
-music.addEventListener("play", () => {
-  document.querySelector(".path-bee")?.classList.add("bee-dancing");
-});
+  let musicStarted = false;
+  let canHideOverlay = false;
 
-music.addEventListener("pause", () => {
-  document.querySelector(".path-bee")?.classList.remove("bee-dancing");
-});
+  // Habilitar la posibilidad de ocultar el overlay después de 3 segundos
+  setTimeout(() => {
+    canHideOverlay = true;
+  }, 5000);
 
+  // Función para iniciar música con fade-in
+    function fadeInMusic() {
+    if (musicStarted) return;
+    musicStarted = true;
+
+    music.muted = false;
+    music.volume = 0;
+
+    music.load(); // asegura que el audio se cargue
+    music.play().then(() => {
+        let vol = 0;
+        const fade = setInterval(() => {
+        if (vol < 0.4) {
+            vol += 0.02;
+            music.volume = vol;
+        } else {
+            clearInterval(fade);
+        }
+        }, 150);
+    }).catch(err => console.log("iOS/Android bloqueo autoplay o audio no cargado:", err));
+    }
+
+
+  // Función para iniciar experiencia al tocar o hacer click en overlay
+  function startExperience() {
+    if (!canHideOverlay) return; // no ocultar si aún no pasaron 3 seg
+    overlay.style.display = "none";
+    fadeInMusic();
+
+    overlay.removeEventListener("click", startExperience);
+    overlay.removeEventListener("touchend", startExperience);
+  }
+
+  // Detectar tap real en móviles
+  overlay.addEventListener("touchend", (e) => {
+    console.log("tap overlay");
+    e.preventDefault(); // evita que se dispare click después del touch
+    startExperience();
+  });
+
+  // Detectar click en escritorio
+  overlay.addEventListener("click", startExperience);
+
+  // Botón Play / Pause
+  musicBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    if (music.paused) {
+      music.play().catch(err => console.log("Error al reproducir:", err));
+      musicBtn.textContent = "🔊";
+    } else {
+      music.pause();
+      musicBtn.textContent = "🔇";
+    }
+  });
+
+  // Animación de la abeja
+  music.addEventListener("play", () => {
+    document.querySelector(".path-bee")?.classList.add("bee-dancing");
+  });
+
+  music.addEventListener("pause", () => {
+    document.querySelector(".path-bee")?.classList.remove("bee-dancing");
+  });
+});
 
 /***********************
  🎬 AUTO SCROLL TIPO VIDEO
@@ -100,7 +125,6 @@ setTimeout(() => {
     behavior: "smooth"
   });
 }, 6000);
-
 
 /***********************
  ✨ ANIMACIONES ON SCROLL
