@@ -6,17 +6,25 @@
   <title>Alaia – Mi Primer Cumpleaños</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+
+    <link rel="stylesheet" href="css/styles.css">
+    <!--<link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/components.css">-->
 </head>
 <body>
+    <div id="start-overlay">
+        <div class="start-content">
+            <span>🌸</span>
+            <p style="text-align: center;">Toca aquí y</p>
+            <p style="text-align: center;">descubre una gran sorpresa ✨🐝</p>
+        </div>
+    </div>
 
   <!-- 🎵 AUDIO -->
-  <audio id="bg-music" loop>
-    <source src="assets/audio/abejita-chiquitita.mp3" type="audio/mpeg">
-  </audio>
-
-  <button id="audio-btn">🔊</button>
-
+    <audio id="bg-music" loop>
+    <source src="./assets/audio/abejita-chiquitita.mp3" type="audio/mpeg">
+    </audio>
   <!-- 🎈 HERO (VIDEO STYLE) -->
   <section class="hero">
 
@@ -156,5 +164,8 @@
 </section>
 
   <script src="js/main.js"></script>
+  <button id="music-toggle" class="music-btn">🔊</button>
+
 </body>
+
 </html>
