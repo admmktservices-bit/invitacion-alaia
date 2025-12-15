@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Alaia – Mi Primer Cumpleaños</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- 🎵 AUDIO -->
+  <audio id="bg-music" loop>
+    <source src="assets/audio/abejita-chiquitita.mp3" type="audio/mpeg">
+  </audio>
+
+  <button id="audio-btn">🔊</button>
+
+  <!-- 🎈 HERO (VIDEO STYLE) -->
+  <section class="hero">
+
+    <!-- 🦋 MARIPOSITA -->
+    <div class="mariposita-container">
+      <img src="assets/img/mariposita.png" class="mariposita" alt="Mariposita">
+    </div>
+
+    <h1 class="scene scene-1 parisienne-regular">Nuestra abejita chiquitita <img src="assets/img/cera.png" style="height: 0.9em"></h1>
+    <h2 class="scene scene-2">Alaia Briones Franco</h2>
+    
+    <!-- 📸 FOTO CON MARCO FLORAL -->
+    <div class="photo-frame scene scene-3">
+        
+        <!-- 🌸 FLORES -->
+        <span class="flower f1">🌸</span>
+        <span class="flower f2">🌼</span>
+        <span class="flower f3">🌷</span>
+        <span class="flower f4">🌺</span>
+        <div class="gold-ring"></div>
+        <img src="assets/img/Alaia_abejita.png" alt="Alaia">
+    </div>
+    <!--<img src="assets/img/abejita.png" class="abejita" alt="Abejita">-->
+
+    <!--<p class="scene scene-3">Cumplo 1 añito 🎂</p>-->
+    <div class="cumple-uno">
+        <span class="label left">Cumple</span>
+
+        <div class="numero-container">
+            <span class="numero">1</span>
+
+            <!-- Abejita -->
+            <span class="bee">🐝</span>
+
+            <!-- Flor -->
+            <span class="flower-icon">🌼</span>
+        </div>
+
+        <span class="label right">Añito</span>
+    </div>
+
+  </section>
+
+  <section class="story-section">
+
+  <!-- 💕 MENSAJE -->
+  <p class="story-line s1">
+    Con un corazón lleno de amor y sonrisas 💕
+  </p>
+
+  <p class="story-line s2">
+    queremos compartir contigo un momento muy especial.
+  </p>
+
+  <p class="story-line s3">
+    Alaia cumple su primer añito 🎂  
+    y celebrarlo junto a ti nos hace inmensamente felices ✨
+  </p>
+
+  <p class="story-line s4">
+    Tu presencia será un regalo que guardaremos  
+    para siempre en nuestros recuerdos 🦋
+  </p>
+
+  <!-- 🌸 CAMINITO -->
+  <div class="path-wrapper">
+    <img src="assets/img/abejita.png" class="path-bee" alt="Abejita">
+    <div class="path-line"></div>
+
+    <div class="path-step">🌸</div>
+    <div class="path-step">🌼</div>
+    <div class="path-step">🌸</div>
+
+    <p class="path-text">
+        Sigue este caminito de flores  
+        que nos llevará al lugar  
+        donde celebraremos juntos 🌷
+    </p>
+    
+    
+    <img src="assets/img/abejita.png" class="path-bee" alt="Abejita">
+    <div class="path-line"></div>
+
+    <div class="path-step">🌸</div>
+    <div class="path-step">🌼</div>
+    <div class="path-step">🌸</div>
+    </div>
+
+
+  <!-- 📅 FECHA -->
+  <div class="event-info">
+    <p>📆 <strong>27 de diciembre</strong></p>
+    <p>📍 <strong>Santa Elena, amantes de sumpa</strong></p>
+    <p>⏰ <strong>3:00 de la tarde</strong></p>
+  </div>
+
+  <!-- 🗺️ MAPA -->
+  <div class="map-wrapper">
+    <p class="map-title">
+      Aquí comienza el camino hacia  
+      un día lleno de alegría 🐝✨
+    </p>
+
+    <div class="map-frame">
+      <!-- MAPA REAL AQUÍ -->
+      <iframe src="https://www.google.com/maps/embed?pb=!4v1765755802071!6m8!1m7!1s4YRcFrR6EKMB8mVHFr6EJg!2m2!1d-2.232867551116686!2d-80.86645871561967!3f156.02205481581603!4f-10.34196722309099!5f0.7820865974627469" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+</section>
+
+
+  <!-- ⏳ CUENTA REGRESIVA -->
+  <section class="countdown animate-on-scroll">
+    <h3>Falta muy poquito ✨</h3>
+    <div id="timer" class="timer-animated"></div>
+  </section>
+
+<section class="final-message">
+  <div class="final-card">
+    <p class="final-text">
+      Será un día muy especial 💖  
+      lleno de sonrisas, abrazos  
+      y momentos que guardaremos  
+      por siempre en el corazón ✨
+      <br><br>
+      Gracias por ser parte  
+      del primer añito de  
+      <strong>Alaia</strong> 🦋🐝
+    </p>
+
+     <a class="btn"
+       href="https://wa.me/593967410132?text=Hola%20💖%20confirmo%20la%20asistencia%20al%20primer%20cumpleaños%20de%20Alaia%20Briones%20Franco%20🦋🎂✨"
+       target="_blank">
+      💌 Confirmar asistencia
+    </a>
+  </div>
+</section>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

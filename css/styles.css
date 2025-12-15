@@ -1,0 +1,689 @@
+@import url('https://fonts.googleapis.com/css2?family=Parisienne&display=swap');
+
+.parisienne-regular {
+  font-family: "Parisienne", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background-image: url('../assets/img/floral-pattern.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-attachment: fixed;
+
+  color: #6b4c6b;
+  text-align: center;
+  overflow-x: hidden;
+}
+
+
+/* 🎥 FONDO ANIMADO (EFECTO VIDEO) */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.65);
+  z-index: -1;
+}
+
+@keyframes fondo {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0); }
+}
+
+/* 🎈 HERO FULLSCREEN */
+.hero {
+  min-height: 100vh;
+  padding: 20px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  /*color: #ff7ab6;*/
+  color: #F4B01A;
+  background-color: #f5f5dca6;
+  font-weight: 600;
+}
+
+.hero h2 {
+  font-size: 2.17rem;
+  margin-top: 10px;
+  color: #ff59a6;
+}
+
+.hero p {
+  font-size: 2.2rem;
+  margin-top: 8px;
+}
+
+/* 🎬 ESCENAS */
+.scene {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: sceneIn 0.8s ease-out forwards;
+}
+
+.scene-1 { animation-delay: 0.5s; }
+.scene-2 { animation-delay: 1.4s; }
+.scene-3 { animation-delay: 2.3s; }
+
+@keyframes sceneIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 🦋 MARIPOSITA – VUELO CURVO INFINITO */
+.mariposita-container {
+  position: absolute;
+  top: 40px;
+  width: 100%;
+  /*height: 160px;*/
+  height: 110px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.mariposita {
+  position: absolute;
+  width: 110px;
+  left: -130px;
+  animation: vuelo 14s linear infinite;
+}
+
+@keyframes vuelo {
+  0%   { transform: translateX(0) translateY(40px); }
+  25%  { transform: translateX(30vw) translateY(0); }
+  50%  { transform: translateX(60vw) translateY(45px); }
+  75%  { transform: translateX(90vw) translateY(10px); }
+  100% { transform: translateX(140vw) translateY(40px); }
+}
+
+/* 📦 TARJETA */
+.card {
+  background: #ffffffcc;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+}
+
+/* ⏳ CUENTA REGRESIVA */
+.countdown {
+  margin: 30px 20px;
+}
+
+#timer {
+  font-size: 2.4rem;
+  color: #ff7ab6;
+  font-weight: 600;
+  font-size: 2.4rem;
+}
+
+/* 📲 BOTÓN */
+.btn {
+  display: inline-block;
+  background: #ff7ab6;
+  color: #fff;
+  padding: 15px 30px;
+  border-radius: 40px;
+  text-decoration: none;
+  font-size: 1.1rem;
+  margin: 30px auto;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* 🔊 AUDIO */
+#audio-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #fff;
+  border: none;
+  border-radius: 50px;
+  padding: 10px 16px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  cursor: pointer;
+}
+
+/* 📱 MOBILE */
+@media (max-width: 480px) {
+  /*.mariposita { width: 90px; }*/
+  .mariposita { width: 60px; }
+}
+
+
+/* 📸 FOTO OVALADA CON MARCO FLORAL */
+.photo-frame {
+  position: relative;
+  width: 220px;
+  height: 280px;
+  margin: 20px auto;
+  border-radius: 50% / 45%;
+  background:
+    radial-gradient(circle at top left, #ffd1dc, transparent 40%),
+    radial-gradient(circle at bottom right, #cce7ff, transparent 45%),
+    radial-gradient(circle at top right, #fff3b0, transparent 35%);
+  padding: 10px;
+  box-shadow:
+    0 10px 25px rgba(255, 180, 210, 0.4);
+    
+    background-color: lightpink;
+}
+
+/* ARO DORADO */
+.photo-frame .gold-ring {
+  position: absolute;
+  inset: 6px;
+  border-radius: 50% / 45%;
+  border: 3px solid rgba(212, 175, 55, 0.85);
+  box-shadow:
+    0 0 10px rgba(212,175,55,0.6);
+  pointer-events: none;
+}
+
+/* FOTO */
+.photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50% / 45%;
+  position: relative;
+  z-index: 1;
+}
+
+/* 🎬 ESCENA EXTRA */
+.scene-4 { animation-delay: 3.2s; }
+
+
+.photo-frame::after {
+  content: "✿ ✿ ✿";
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+  color: #ff9fcf;
+  opacity: 0.7;
+}
+
+@media (max-width: 480px) {
+  .photo-frame {
+    width: 180px;
+    height: 230px;
+  }
+}
+
+/* 🌸 FLORES ALREDEDOR DEL MARCO */
+.flower {
+  position: absolute;
+  font-size: 22px;
+  animation: floatFlower 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.f1 { top: -10px; left: 20px; animation-delay: 0s; }
+.f2 { top: 30px; right: -12px; animation-delay: 1s; }
+.f3 { bottom: 20px; left: -10px; animation-delay: 2s; }
+.f4 { bottom: -12px; right: 25px; animation-delay: 3s; }
+
+@keyframes floatFlower {
+  0%   { transform: translateY(0) rotate(0deg); }
+  50%  { transform: translateY(-8px) rotate(8deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+/* 🐝 ABEJITA ANIMADA */
+.abejita {
+  position: absolute;
+  top: 55%;
+  left: -120px;
+  width: 80px;
+  z-index: 5;
+  animation: vueloAbejita 10s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes vueloAbejita {
+  0% {
+    transform: translateX(0) translateY(0) scale(0.9);
+  }
+  25% {
+    transform: translateX(35vw) translateY(-30px) scale(1);
+  }
+  50% {
+    transform: translateX(60vw) translateY(20px) scale(1.05);
+  }
+  75% {
+    transform: translateX(85vw) translateY(-10px) scale(1);
+  }
+  100% {
+    transform: translateX(140vw) translateY(0) scale(0.9);
+  }
+}
+
+/* 🎂 CUMPLE 1 AÑITO */
+.cumple-uno {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: 25px 0;
+}
+
+/* Texto "Cumple" y "Añito" */
+.cumple-uno .label {
+  font-size: 2rem;
+  color: #c9a24d; /* dorado suave */
+  position: relative;
+  padding: 0 8px;
+  font-weight: 500;
+}
+
+.cumple-uno .label::before,
+.cumple-uno .label::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 18px;
+  height: 1px;
+  background: #c9a24d;
+}
+
+.cumple-uno .label.left::before {
+  left: -22px;
+}
+
+.cumple-uno .label.right::after {
+  right: -22px;
+}
+
+/* Número 1 */
+.numero-container {
+  position: relative;
+  width: 70px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.numero {
+  font-size: 4.5rem;
+  font-weight: 700;
+  line-height: 1;
+  background: linear-gradient(180deg, #f5d77a, #c9a24d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Abejita */
+.bee {
+  position: absolute;
+  top: 8px;
+  right: -10px;
+  font-size: 1.2rem;
+  animation: beeFloat 3s ease-in-out infinite;
+}
+
+/* Flor */
+.flower-icon {
+  position: absolute;
+  bottom: 6px;
+  left: -6px;
+  font-size: 1.2rem;
+}
+
+/* Animación suave abeja */
+@keyframes beeFloat {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+
+
+/* 🌸 SECCIÓN HISTORIA */
+.story-section {
+  padding: 20px 20px;
+  max-width: 700px;
+  margin: auto;
+}
+
+/* 💕 TEXTO ANIMADO */
+.story-line {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: textIn 0.8s ease-out forwards;
+  margin-bottom: 14px;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.s1 { animation-delay: 0.3s; }
+.s2 { animation-delay: 1.2s; }
+.s3 { animation-delay: 2.2s; }
+.s4 { animation-delay: 3.4s; }
+
+@keyframes textIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 🌸 CAMINITO */
+.path {
+  margin: 30px 0 10px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  font-size: 22px;
+  animation: floatPath 3s ease-in-out infinite;
+}
+
+@keyframes floatPath {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+
+.path-text {
+  font-size: 1rem;
+  margin-bottom: 30px;
+}
+
+/* 📅 INFO EVENTO */
+.event-info {
+  background: rgba(255,255,255,0.7);
+  border-radius: 18px;
+  padding: 18px;
+  margin-bottom: 40px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+}
+
+/* 🗺️ MAPA CREATIVO */
+.map-wrapper {
+  margin-bottom: 60px;
+}
+
+.map-title {
+  margin-bottom: 16px;
+  font-size: 1.05rem;
+}
+
+/* MARCO DEL MAPA */
+.map-frame {
+  border-radius: 26px;
+  padding: 10px;
+  background:
+    radial-gradient(circle at top left, #ffd1dc, transparent 40%),
+    radial-gradient(circle at bottom right, #cce7ff, transparent 45%),
+    linear-gradient(180deg, #fff, #fff);
+  box-shadow:
+    0 15px 30px rgba(255, 180, 210, 0.35);
+  animation: mapIn 1s ease-out forwards;
+}
+
+@keyframes mapIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.map-frame iframe {
+  width: 100%;
+  height: 280px;
+  border: none;
+  border-radius: 18px;
+}
+
+/* 📱 MOBILE */
+@media (max-width: 480px) {
+  .map-frame iframe {
+    height: 240px;
+  }
+}
+
+
+/* 🌸 CAMINITO VERTICAL */
+.path-wrapper {
+  position: relative;
+  margin: 40px auto 50px;
+  width: 100%;
+  max-width: 200px;
+  text-align: center;
+}
+
+/* Línea del camino */
+.path-line {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 4px;
+  height: 160px;
+  transform: translateX(-50%);
+  border-radius: 10px;
+  background: linear-gradient(
+    180deg,
+    #ffd1dc,
+    #fff3b0,
+    #cce7ff
+  );
+  animation: glowPath 3s ease-in-out infinite;
+}
+
+
+@keyframes glowPath {
+  0%   { box-shadow: 0 0 6px rgba(255, 200, 220, 0.4); }
+  50%  { box-shadow: 0 0 14px rgba(255, 215, 120, 0.9); }
+  100% { box-shadow: 0 0 6px rgba(255, 200, 220, 0.4); }
+}
+
+/* Pasos florales */
+.path-step {
+  position: relative;
+  z-index: 2;
+  font-size: 26px;
+  margin: 20px auto;
+  animation: stepFloat 2.5s ease-in-out infinite;
+}
+
+.path-step:nth-child(2) { animation-delay: 0s; }
+.path-step:nth-child(3) { animation-delay: 0.6s; }
+.path-step:nth-child(4) { animation-delay: 1.2s; }
+
+@keyframes stepFloat {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+
+/* Texto del caminito */
+.path-text {
+  margin-top: 20px;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+
+/* 🐝 ABEJITA BAJANDO POR EL CAMINO */
+.path-bee {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  width: 50px;
+  transform: translateX(-50%);
+  animation: beeDown 6s ease-in-out infinite;
+  z-index: 3;
+  pointer-events: none;
+}
+
+@keyframes beeDown {
+  0%   { transform: translate(-50%, 0) rotate(0deg); }
+  40%  { transform: translate(-50%, 80px) rotate(10deg); }
+  70%  { transform: translate(-50%, 140px) rotate(-8deg); }
+  100% { transform: translate(-50%, 0) rotate(0deg); }
+}
+
+
+.event-info p{
+    font-size: 1.3rem;
+}
+
+/* 💌 MENSAJE FINAL */
+.final-message {
+  padding: 60px 20px 80px;
+  display: flex;
+  justify-content: center;
+}
+
+.final-card {
+  max-width: 360px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 28px;
+  padding: 30px 24px 36px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+  animation: finalIn 1s ease forwards;
+}
+
+@keyframes finalIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.final-text {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #6b4c3b;
+  margin-bottom: 30px;
+}
+
+/* 💌 BOTÓN CONFIRMAR */
+.confirm-btn {
+  display: inline-block;
+  background: linear-gradient(
+    135deg,
+    #ffb6c1,
+    #ffd966,
+    #cce7ff
+  );
+  color: #6b3e2e;
+  font-weight: 600;
+  padding: 14px 26px;
+  border-radius: 40px;
+  text-decoration: none;
+  font-size: 1rem;
+  box-shadow: 0 10px 20px rgba(255, 200, 120, 0.4);
+  animation: pulseBtn 2.5s ease-in-out infinite;
+}
+
+@keyframes pulseBtn {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.countdown {
+    font-size: 1.5rem;
+}
+
+
+/* ⏳ COUNTDOWN */
+.countdown {
+  margin: 50px auto 30px;
+  text-align: center;
+}
+
+@keyframes countdownIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.countdown h3 {
+  font-size: 2rem;
+  margin-bottom: 12px;
+  color: #6b4c3b;
+}
+/* ⏳ COUNTDOWN */
+.countdown {
+  margin: 50px auto 30px;
+  text-align: center;
+}
+
+@keyframes countdownIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+/* ⏰ TIMER ANIMADO */
+.timer-animated {
+  display: inline-block;
+  font-size: 1.4rem;
+  font-weight: 600;
+  padding: 14px 26px;
+  border-radius: 24px;
+  background: linear-gradient(
+    135deg,
+    #fff1c1,
+    #ffd1dc,
+    #cce7ff
+  );
+  color: #6b3e2e;
+  box-shadow: 0 10px 20px rgba(255, 200, 150, 0.35);
+}
+
+@keyframes timerPulse {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+
