@@ -31,6 +31,7 @@ function updateCountdown() {
 
 updateCountdown();
 setInterval(updateCountdown, 60000);
+
 /***********************
  🎵 MÚSICA + OVERLAY + BOTÓN PLAY/PAUSE
 ************************/
@@ -47,52 +48,51 @@ document.addEventListener("DOMContentLoaded", () => {
   let musicStarted = false;
   let canHideOverlay = false;
 
-  // Habilitar la posibilidad de ocultar el overlay después de 3 segundos
+  // Overlay visible mínimo 3 segundos
   setTimeout(() => {
     canHideOverlay = true;
-  }, 5000);
+  }, 3000);
 
   // Función para iniciar música con fade-in
-    function fadeInMusic() {
+  function fadeInMusic() {
     if (musicStarted) return;
     musicStarted = true;
 
     music.muted = false;
     music.volume = 0;
 
-    music.load(); // asegura que el audio se cargue
+    // Play directamente dentro del evento de interacción
     music.play().then(() => {
-        let vol = 0;
-        const fade = setInterval(() => {
+      let vol = 0;
+      const fade = setInterval(() => {
         if (vol < 0.4) {
-            vol += 0.02;
-            music.volume = vol;
+          vol += 0.02;
+          music.volume = vol;
         } else {
-            clearInterval(fade);
+          clearInterval(fade);
         }
-        }, 150);
-    }).catch(err => console.log("iOS/Android bloqueo autoplay o audio no cargado:", err));
-    }
-
+      }, 50);
+    }).catch(err => console.log("iOS/Android bloqueo autoplay:", err));
+  }
 
   // Función para iniciar experiencia al tocar o hacer click en overlay
   function startExperience() {
     if (!canHideOverlay) return; // no ocultar si aún no pasaron 3 seg
     overlay.style.display = "none";
+    setTimeout(() => { overlay.style.display = "none"; }, 600); // coincide con transition
     fadeInMusic();
 
     overlay.removeEventListener("click", startExperience);
     overlay.removeEventListener("touchend", startExperience);
   }
 
-  // Detectar tap real en móviles
+  // Tap real en móviles
   overlay.addEventListener("touchend", (e) => {
-    console.log("tap overlay");
     e.preventDefault(); // evita que se dispare click después del touch
     startExperience();
   });
 
-  // Detectar click en escritorio
+  // Click en escritorio
   overlay.addEventListener("click", startExperience);
 
   // Botón Play / Pause
@@ -107,7 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Animación de la abeja
+  // Abeja bailando
   music.addEventListener("play", () => {
     document.querySelector(".path-bee")?.classList.add("bee-dancing");
   });
