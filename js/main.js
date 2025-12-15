@@ -1,59 +1,110 @@
-/* ⏳ CUENTA REGRESIVA */
-const targetDate = new Date("December 27, 2025 15:00:00").getTime();
+/***********************
+ ⏳ CUENTA REGRESIVA
+************************/
+const targetDate = new Date("2025-12-27T15:00:00").getTime();
+const timerEl = document.getElementById("timer");
+let lastValue = "";
 
-setInterval(() => {
+function updateCountdown() {
   const now = new Date().getTime();
-  const distance = targetDate - now;
+  const diff = targetDate - now;
 
-  if (distance < 0) {
-    document.getElementById("timer").innerHTML = "¡Hoy es el gran día! 🎉";
+  if (diff <= 0) {
+    timerEl.innerHTML = "¡Hoy celebramos! 🎉🎂";
     return;
   }
 
-  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
-  const minutes = Math.floor((distance / (1000 * 60)) % 60);
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((diff / (1000 * 60)) % 60);
 
-  document.getElementById("timer").innerHTML =
-    `${days} días ${hours}h ${minutes}m`;
-}, 1000);
+  const newValue = `${days} días ${hours}h ${minutes}m`;
 
-/* 🎵 AUDIO */
-const audio = document.getElementById("bg-music");
-const btn = document.getElementById("audio-btn");
-let playing = false;
-
-btn.addEventListener("click", () => {
-  audio.volume = 0.2;
-  if (!playing) {
-    audio.play();
-    btn.innerHTML = "🔇 Música";
-  } else {
-    audio.pause();
-    btn.innerHTML = "🔊 Música";
+  if (newValue !== lastValue) {
+    timerEl.innerHTML = newValue;
+    timerEl.classList.remove("timer-change");
+    void timerEl.offsetWidth; // 👈 reflow para reiniciar animación
+    timerEl.classList.add("timer-change");
+    lastValue = newValue;
   }
-  playing = !playing;
+}
+
+updateCountdown();
+setInterval(updateCountdown, 60000);
+
+/***********************
+ 🎵 MÚSICA
+************************/
+const music = document.getElementById("bg-music");
+const musicBtn = document.getElementById("music-toggle");
+const overlay = document.getElementById("start-overlay");
+
+let musicStarted = false;
+
+function fadeInMusic() {
+  if (musicStarted) return;
+  musicStarted = true;
+
+  music.volume = 0;
+  music.play().then(() => {
+    let vol = 0;
+    const fade = setInterval(() => {
+      if (vol < 0.4) {
+        vol += 0.02;
+        music.volume = vol;
+      } else {
+        clearInterval(fade);
+      }
+    }, 150);
+  });
+}
+
+/* Overlay: primer toque */
+overlay.addEventListener("click", () => {
+  overlay.style.display = "none";
+
+  setTimeout(() => {
+    fadeInMusic();
+  }, 1000); // ⏱️ 2 segundos reales
 });
 
-/* 🎬 AUTOPLAY AL PRIMER TOQUE */
-document.body.addEventListener("click", () => {
-  if (!playing) {
-    audio.volume = 0.2;
-    audio.play();
-    btn.innerHTML = "🔇 Música";
-    playing = true;
-  }
-}, { once: true });
 
-/* 🎥 AUTO AVANCE COMO VIDEO */
+
+/* Botón ON / OFF */
+musicBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+  if (music.paused) {
+    music.play();
+    musicBtn.textContent = "🔊";
+  } else {
+    music.pause();
+    musicBtn.textContent = "🔇";
+  }
+});
+
+/* Abejita baila con música */
+music.addEventListener("play", () => {
+  document.querySelector(".path-bee")?.classList.add("bee-dancing");
+});
+
+music.addEventListener("pause", () => {
+  document.querySelector(".path-bee")?.classList.remove("bee-dancing");
+});
+
+
+/***********************
+ 🎬 AUTO SCROLL TIPO VIDEO
+************************/
 setTimeout(() => {
-  document.querySelector(".card").scrollIntoView({
+  document.querySelector(".card")?.scrollIntoView({
     behavior: "smooth"
   });
 }, 6000);
 
 
-// 🎬 Activar animaciones al entrar en pantalla
+/***********************
+ ✨ ANIMACIONES ON SCROLL
+************************/
 const observer = new IntersectionObserver(
   entries => {
     entries.forEach(entry => {
@@ -68,46 +119,4 @@ const observer = new IntersectionObserver(
 document.querySelectorAll(".story-line, .map-frame").forEach(el => {
   el.style.animationPlayState = "paused";
   observer.observe(el);
-});
-
-// ⏳ COUNTDOWN REAL
-const eventDate = new Date("2025-12-27T15:00:00");
-
-function updateCountdown() {
-  const now = new Date();
-  const diff = eventDate - now;
-
-  if (diff <= 0) {
-    document.getElementById("timer").innerHTML = "¡Hoy celebramos! 🎉🎂";
-    return;
-  }
-
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-  const minutes = Math.floor((diff / (1000 * 60)) % 60);
-
-  document.getElementById("timer").innerHTML =
-    `${days} días ${hours}h ${minutes}m`;
-}
-
-updateCountdown();
-setInterval(updateCountdown, 60000);
-
-
-
-// 🎵 Música después de 2 segundos
-window.addEventListener("load", () => {
-  const music = document.getElementById("bg-music");
-
-  if (!music) return;
-
-  setTimeout(() => {
-    music.volume = 0.4; // volumen suave
-    music.play().catch(() => {
-      // Si el navegador bloquea autoplay, espera interacción
-      document.addEventListener("click", () => {
-        music.play();
-      }, { once: true });
-    });
-  }, 2000);
 });
